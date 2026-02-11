@@ -90,7 +90,7 @@ exports.getAllTurfs = async (req, res) => {
 
 exports.getLimitedTurfs = async (req, res) => {
   try {
-    let limitedTurfs = await turfModel.find().limit(6);
+    let limitedTurfs = await turfModel.find().limit(8);
     res
       .status(200)
       .json({ message: "List of Limited Turf are here", limitedTurfs });

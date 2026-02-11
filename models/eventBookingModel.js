@@ -1,57 +1,66 @@
 const mongoose = require("mongoose");
-const bookSchema = new mongoose.Schema(
+
+const eventBookingSchema = new mongoose.Schema(
   {
-    turfId: {
+    eventId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "turfs",
+      ref: "events",
       required: true,
     },
-    turfName: {
-      type: String,
 
-      required: true,
-    },
-    description: {
+    eventName: {
       type: String,
       required: true,
     },
 
-    timeSlot: {
+    userEmail: {
       type: String,
       required: true,
     },
-    sellerMail: {
+
+    ownerEmail: {
       type: String,
       required: true,
     },
-    buyerMail: {
+
+    eventDate: {
       type: String,
       required: true,
     },
-    turfImage: {
+
+    eventTime: {
       type: String,
       required: true,
     },
-    turfPrice: {
+
+    pricePerPerson: {
       type: Number,
       required: true,
     },
+
     numberOfPlayers: {
       type: Number,
       required: true,
     },
+
     totalAmount: {
       type: Number,
       required: true,
     },
-    status: {
+
+    bookingStatus: {
       type: String,
       enum: ["Booked", "Cancelled"],
       default: "Booked",
     },
+
+    paymentStatus: {
+      type: String,
+      enum: ["Pending", "Paid"],
+      default: "Pending",
+    },
   },
   { timestamps: true },
 );
-
-const bookModel = mongoose.model("bookings", bookSchema);
-module.exports = bookModel;
+const eventBookingModel = mongoose.model("eventBookings", eventBookingSchema);
+module.exports = eventBookingModel;

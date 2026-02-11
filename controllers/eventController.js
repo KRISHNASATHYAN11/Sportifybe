@@ -75,7 +75,7 @@ exports.getAllEvents = async(req,res)=>{
 
 exports.getLimitedEvents = async (req, res) => {
   try {
-    let limitedEvents = await eventModel.find().limit(6);
+    let limitedEvents = await eventModel.find().limit(8);
     res
       .status(200)
       .json({ message: "List of Limited Turf are here", limitedEvents});

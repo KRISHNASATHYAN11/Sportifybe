@@ -5,7 +5,11 @@ const jwtMiddleware = require("./middleware/jwtMiddleware");
 const turfController = require("./controllers/turfController");
 const multerMiddleware = require("./middleware/multerMiddleware");
 const eventController = require("./controllers/eventController")
-const bookingController = require('./controllers/bookingController')
+const bookingController = require('./controllers/bookingController');
+const jwtOwnerMiddleware = require("./middleware/jwtOwnerMiddleware");
+const ownerController = require('./controllers/ownerController')
+const eventBookingController = require('./controllers/eventBookingController')
+const teamController = require('./controllers/teamController')
 
 // call express router
 const router = new express.Router();
@@ -42,6 +46,12 @@ router.put('/:id/follow',jwtMiddleware,userController.followUser)
 router.put('/:id/unfollow',jwtMiddleware,userController.unfollowUser)
 
 router.post('/makeBooking',jwtMiddleware,bookingController.bookTurf)
+
+router.post('/eventBooking',jwtMiddleware,eventBookingController.bookEvent)
+
+router.get('/getAllUsers',jwtOwnerMiddleware,ownerController.getAllUsers)
+
+router.post('/addTeam',jwtMiddleware,teamController.addTeam)
 
 
 module.exports = router;

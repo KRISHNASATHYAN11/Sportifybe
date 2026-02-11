@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const jwtMiddleware = async (req, res, next) => {
+const jwtOwnerMiddleware = async (req, res, next) => {
   try {
     // string to array - split
     let token = req.headers.authorization.split(" ")[1];
@@ -10,11 +10,12 @@ const jwtMiddleware = async (req, res, next) => {
       // token to payload(data),send secretkey
       let jwtData = await jwt.verify(token, process.env.jwtSecret);
       if (jwtData) {
-        req.userEmail = jwtData.email;
-        
+       if(jwtData.userType == 'owner'){
+         req.userEmail = jwtData.email;
         next();
+       }
       } else {
-        res.status(400).json({ message: "Invalid Token, Please Login" });
+        res.status(401).json({ message: "This Operation can only be done by Owner Users." });
       }
 
       // console.log(jwtData);
@@ -29,4 +30,4 @@ const jwtMiddleware = async (req, res, next) => {
   }
 };
 
-module.exports = jwtMiddleware;
+module.exports = jwtOwnerMiddleware;

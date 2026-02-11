@@ -35,14 +35,11 @@ const userSchema = mongoose.Schema({
   },
   userType: {
     type: String,
-    enum: ["user", "owner", "admin"],
-    // enum prevents invalidd values from being stored in the database.
     default: "user",
   },
 
   profilePic: {
     type: String,
-    // default: "",
   },
   followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "users" }],
   following: [{ type: mongoose.Schema.Types.ObjectId, ref: "users" }],
